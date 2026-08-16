@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS
+   Centralized color system. Components must reference these
+   tokens; raw color values are forbidden in components.
+   ============================================================ */
+
+@theme {
+  --color-primary: #7bca51;
+  --color-primary-dark: #4a8b2c;
+  --color-primary-deep: #2f5c1c;
+  --color-sage: #9abf86;
+  --color-mist: #ecedeb;
+  --color-ink: #171a1d;
+  --color-ink-soft: #4a5258;
+  --color-line: #dde1dc;
+
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+
+  --shadow-soft: 0 1px 2px rgb(23 26 29 / 0.04),
+    0 8px 24px -12px rgb(23 26 29 / 0.12);
+  --shadow-glass: 0 12px 40px -12px rgb(23 26 29 / 0.18),
+    0 2px 8px -2px rgb(23 26 29 / 0.06);
+
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--color-mist);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary-dark);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   GLASS SURFACES
+   Used sparingly: navbar, promo panel, floating chips.
+   ============================================================ */
+
+.glass {
+  background-color: rgb(255 255 255 / 0.66);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid rgb(255 255 255 / 0.55);
+  box-shadow: var(--shadow-glass);
+}
+
+.glass-dark {
+  background-color: rgb(23 26 29 / 0.6);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  backdrop-filter: blur(12px) saturate(1.2);
+  border: 1px solid rgb(255 255 255 / 0.14);
+}
+
+/* ============================================================
+   MARQUEE
+   Seamless infinite loop: the track contains the content twice
+   and translates by -50%; the outer wrapper clips overflow.
+   ============================================================ */
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   NO-VISIBLE-SCROLLBAR helper for horizontally scrollable rows
+   ============================================================ */
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

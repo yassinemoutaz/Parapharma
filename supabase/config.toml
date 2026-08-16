@@ -1,0 +1,34 @@
+# Supabase configuration for local development.
+# Managed with the Supabase CLI (supabase start / db push / db reset).
+
+project_id = "pharma-2"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 15
+
+[db.migrations]
+enabled = true
+schema_paths = []
+
+[db.seed]
+enabled = false
+sql_paths = []
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000/**"]
+
+# Storage is intentionally NOT part of this architecture:
+# all media (product images, category images, banners, logos)
+# is stored in Cloudflare R2, referenced from PostgreSQL.
+[storage]
+enabled = false

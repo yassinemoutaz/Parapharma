@@ -1,0 +1,4 @@
+# Static asset caching at the CDN edge.
+# Hashed Next.js build assets are immutable: cache for one year.
+/_next/static/*
+  Cache-Control: public,max-age=31536000,immutable
